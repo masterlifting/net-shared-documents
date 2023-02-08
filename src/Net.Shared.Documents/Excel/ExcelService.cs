@@ -3,7 +3,7 @@ using System.Text;
 
 using ExcelDataReader;
 
-namespace Shared.Documents.Excel;
+namespace Net.Shared.Documents.Excel;
 
 public static class ExcelService
 {

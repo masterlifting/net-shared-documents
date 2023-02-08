@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Shared.Documents.Excel;
+namespace Net.Shared.Documents.Excel;
 
 public sealed class ExcelDocument
 {
