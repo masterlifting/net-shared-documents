@@ -20,7 +20,7 @@ public sealed class ExcelDocument
     public bool TryGetCellValue(int rowId, int columnId, string pattern, out string? value)
     {
         value = GetCellValue(rowId, columnId);
-        return value is not null && value.IndexOf(pattern, StringComparison.OrdinalIgnoreCase) > -1;
+        return value?.IndexOf(pattern, StringComparison.OrdinalIgnoreCase) > -1;
     }
     public bool TryGetCellValue(int rowId, int columnId, IEnumerable<string> patterns, out string? value)
     {
