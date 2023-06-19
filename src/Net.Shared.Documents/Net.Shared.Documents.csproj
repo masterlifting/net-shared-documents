@@ -11,4 +11,8 @@
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Net.Shared.Documents.Abstractions\Net.Shared.Documents.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,22 +1,24 @@
-﻿using System.Data;
-using Net.Shared.Documents.Interfaces;
+﻿using Net.Shared.Documents.Abstractions.Excel;
+
+using System.Data;
 
 namespace Net.Shared.Documents.Excel;
 
-public sealed class ExcelDocument : IExcelDocument
+public sealed class ExcelDataReaderDocument : IExcelDocument
 {
-    public int RowsCount { get; }
     private readonly DataTable _table;
-    public ExcelDocument(DataTable table)
+
+    public ExcelDataReaderDocument(DataTable table)
     {
         _table = table;
-        RowsCount = table.Rows.Count;
+        RowsCount = _table.Rows.Count;
     }
+    public int RowsCount { get; }
 
     public bool TryGetCell(int rowId, int columnId, out string value)
     {
         value = _table.Rows[rowId].ItemArray[columnId]?.ToString() ?? string.Empty;
-        return !string.IsNullOrWhiteSpace(value);
+        return !string.IsNullOrEmpty(value);
     }
     public bool TryGetCell(int rowId, int columnId, string pattern, out string value) =>
         TryGetCell(rowId, columnId, out value)

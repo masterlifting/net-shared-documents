@@ -1,20 +1,23 @@
-﻿using System.Data;
+﻿using ExcelDataReader;
 using System.Text;
-
-using ExcelDataReader;
+using Net.Shared.Documents.Abstractions.Excel;
 
 namespace Net.Shared.Documents.Excel;
 
-public static class ExcelService
+public sealed class ExcelDataReaderService : IExcelDocumentService
 {
-    public static DataTable LoadTable(byte[] data)
+    public IExcelDocument Load(byte[] document)
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-        using var stream = new MemoryStream(data);
+        
+        using var stream = new MemoryStream(document);
         using var reader = ExcelReaderFactory.CreateBinaryReader(stream);
+        
         var dataSet = reader.AsDataSet();
         var table = dataSet.Tables[0];
+        
         stream.Close();
-        return table;
+
+        return new ExcelDataReaderDocument(table);
     }
 }
