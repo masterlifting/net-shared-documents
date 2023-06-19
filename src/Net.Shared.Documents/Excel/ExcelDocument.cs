@@ -13,15 +13,15 @@ public sealed class ExcelDocument : IExcelDocument
         RowsCount = table.Rows.Count;
     }
 
-    public bool TryGetCell(int rowId, int columnId, out string? value)
+    public bool TryGetCell(int rowId, int columnId, out string value)
     {
-        value = _table.Rows[rowId].ItemArray[columnId]?.ToString();
+        value = _table.Rows[rowId].ItemArray[columnId]?.ToString() ?? string.Empty;
         return !string.IsNullOrWhiteSpace(value);
     }
-    public bool TryGetCell(int rowId, int columnId, string pattern, out string? value) =>
+    public bool TryGetCell(int rowId, int columnId, string pattern, out string value) =>
         TryGetCell(rowId, columnId, out value)
         && value!.IndexOf(pattern, StringComparison.OrdinalIgnoreCase) > -1;
-    public bool TryGetCell(int rowId, int columnId, IEnumerable<string> patterns, out string? value)
+    public bool TryGetCell(int rowId, int columnId, IEnumerable<string> patterns, out string value)
     {
         if (!TryGetCell(rowId, columnId, out value))
             return false;
